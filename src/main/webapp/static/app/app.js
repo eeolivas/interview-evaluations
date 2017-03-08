@@ -7,7 +7,8 @@ var ie = angular.module('myApp', [
   //internal
   'dateDirective',
   'hello',
-  'serviceDirective'
+  'serviceDirective',
+  'TraineesCtrl'
   // 'HomeCtrl',
 
 ]);
