@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.*;
 import org.springframework.data.web.SortDefault.SortDefaults;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/v1/questions")
 public class QuestionController {

@@ -15,7 +15,7 @@ import com.revature.domain.Person;
 import com.revature.log.IntEvalLogger;
 import com.revature.services.PersonLogic;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class PersonController {
