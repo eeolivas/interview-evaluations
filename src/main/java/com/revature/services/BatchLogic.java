@@ -9,7 +9,7 @@ public interface BatchLogic {
 	
 	Batch getBatchByName(String batchName);
 	Batch getBatchById(int batchId);
-	String deleteBatch(Integer id);
+	void deleteBatch(Batch batch);
 	Batch removePersonsFromBatch(Integer batchId, Integer[] personIds);
 	Page<Batch> getAllBatches(Pageable pageable);
 	Batch createBatch(Batch batchName);
