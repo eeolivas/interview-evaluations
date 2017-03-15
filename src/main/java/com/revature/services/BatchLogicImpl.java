@@ -56,10 +56,12 @@ public class BatchLogicImpl implements BatchLogic {
 	}
 
 	@Override
-	public void deleteBatch(Batch batch) {
-		System.out.println("batch to be deleted: " +batch.getId());
-		dao.delete(batch.getId());
-		
+
+	public String deleteBatch(Integer id) {
+		Batch batch = getBatchById(id);
+		dao.delete(batch);
+		return "{\"text\":\"Batch: " + batch.getName() + " - DELETED\"}";
+
 	}
 	
 	@Override
