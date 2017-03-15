@@ -20,6 +20,7 @@ import com.revature.domain.Person;
 import com.revature.services.BatchLogic;
 import com.revature.services.PersonLogic;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class BatchController {
