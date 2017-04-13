@@ -23,6 +23,9 @@ public class QuestionEval implements Serializable {
 	@Column(name="qe_knowledge_score")
 	private Integer knowledgeScore;
 	
+	@Column(name="qe_is_deleted")
+	private boolean isDeleted;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="qe_eid")
 	private Eval eval;
@@ -37,12 +40,13 @@ public class QuestionEval implements Serializable {
 	public QuestionEval(){}
 
 	public QuestionEval(Integer communicationScore, Integer knowledgeScore, Eval eval,
-			QuestionPool questionPool) {
+			QuestionPool questionPool, boolean isDeleted) {
 		super();
 		this.communicationScore = communicationScore;
 		this.knowledgeScore = knowledgeScore;
 		this.eval = eval;
 		this.questionPool = questionPool;
+		this.isDeleted=isDeleted;
 	}
 
 	public Integer getId() {
@@ -93,55 +97,79 @@ public class QuestionEval implements Serializable {
 	public void setComments(List<QuestionComment> comments) {
 		this.comments = comments;
 	}
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	@Override
 	public int hashCode() {
-		int hash = 5;
-		hash = 41 * hash + Objects.hashCode(this.id);
-		hash = 41 * hash + Objects.hashCode(this.communicationScore);
-		hash = 41 * hash + Objects.hashCode(this.knowledgeScore);
-		hash = 41 * hash + Objects.hashCode(this.eval);
-		hash = 41 * hash + Objects.hashCode(this.questionPool);
-		hash = 41 * hash + Objects.hashCode(this.comments);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((communicationScore == null) ? 0 : communicationScore.hashCode());
+		result = prime * result + ((eval == null) ? 0 : eval.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + ((knowledgeScore == null) ? 0 : knowledgeScore.hashCode());
+		result = prime * result + ((questionPool == null) ? 0 : questionPool.hashCode());
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		final QuestionEval other = (QuestionEval) obj;
-		if (!Objects.equals(this.id, other.id)) {
+		QuestionEval other = (QuestionEval) obj;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
 			return false;
-		}
-		if (!Objects.equals(this.communicationScore, other.communicationScore)) {
+		if (communicationScore == null) {
+			if (other.communicationScore != null)
+				return false;
+		} else if (!communicationScore.equals(other.communicationScore))
 			return false;
-		}
-		if (!Objects.equals(this.knowledgeScore, other.knowledgeScore)) {
+		if (eval == null) {
+			if (other.eval != null)
+				return false;
+		} else if (!eval.equals(other.eval))
 			return false;
-		}
-		if (!Objects.equals(this.eval, other.eval)) {
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
-		}
-		if (!Objects.equals(this.questionPool, other.questionPool)) {
+		if (isDeleted != other.isDeleted)
 			return false;
-		}
-		if (!Objects.equals(this.comments, other.comments)) {
+		if (knowledgeScore == null) {
+			if (other.knowledgeScore != null)
+				return false;
+		} else if (!knowledgeScore.equals(other.knowledgeScore))
 			return false;
-		}
+		if (questionPool == null) {
+			if (other.questionPool != null)
+				return false;
+		} else if (!questionPool.equals(other.questionPool))
+			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "QuestionEval{" + "id=" + id + ", communicationScore=" + communicationScore + ", knowledgeScore=" + knowledgeScore + ", questionPool=" + questionPool + ", comments=" + comments + '}';
-	}	
+		return "QuestionEval [id=" + id + ", communicationScore=" + communicationScore + ", knowledgeScore="
+				+ knowledgeScore + ", isDeleted=" + isDeleted + ", eval=" + eval + ", questionPool=" + questionPool
+				+ ", comments=" + comments + "]";
+	}
+	
 	
 }

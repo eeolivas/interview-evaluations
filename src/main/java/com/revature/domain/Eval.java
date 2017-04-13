@@ -43,6 +43,9 @@ public class Eval implements Serializable{
 	@OneToMany(mappedBy="eval", cascade = CascadeType.ALL)
 	private List<EvalComment> comments;
 	
+	@Column(name="e_is_deleted")
+	private boolean isDeleted;
+	
 	@Transient
 	private int evalKnowledgeScore;
 	
@@ -58,7 +61,7 @@ public class Eval implements Serializable{
 	public Eval() {/*empty constructor needed*/}
 
 	public Eval(Integer week, Date date, EvalType evalType, Person trainee, Batch batch,
-			List<QuestionEval> questions, List<EvalComment> comments) {
+			List<QuestionEval> questions, List<EvalComment> comments, boolean isDeleted) {
 		super();
 		this.week = week;
 		this.date = date;
@@ -67,6 +70,7 @@ public class Eval implements Serializable{
 		this.batch = batch;
 		this.questions = questions;
 		this.comments = comments;
+		this.isDeleted = isDeleted;
 	}
 
 	public Integer getId() {
@@ -133,6 +137,14 @@ public class Eval implements Serializable{
 		this.comments = comments;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	
 	public int getEvalKnowledgeScore() {
 		return evalKnowledgeScore;
 	}
@@ -164,7 +176,7 @@ public class Eval implements Serializable{
 	public void setEvalMaxCommunicationScore(int evalMaxCommunicationScore) {
 		this.evalMaxCommunicationScore = evalMaxCommunicationScore;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -174,6 +186,7 @@ public class Eval implements Serializable{
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((evalType == null) ? 0 : evalType.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + ((questions == null) ? 0 : questions.hashCode());
 		result = prime * result + ((trainee == null) ? 0 : trainee.hashCode());
 		result = prime * result + ((week == null) ? 0 : week.hashCode());
@@ -214,6 +227,8 @@ public class Eval implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
 		if (questions == null) {
 			if (other.questions != null)
 				return false;
@@ -235,8 +250,8 @@ public class Eval implements Serializable{
 	@Override
 	public String toString() {
 		return "Eval [id=" + id + ", week=" + week + ", date=" + date + ", evalType=" + evalType + ", trainee="
-				+ trainee + ", batch=" + batch + ", questions=" + questions + ", comments=" + comments + "]";
+				+ trainee + ", batch=" + batch + ", questions=" + questions + ", comments=" + comments + ", isDeleted="
+				+ isDeleted + "]";
 	}
-	
 	
 }

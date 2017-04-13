@@ -37,17 +37,21 @@ public class Person  {
 	@JoinColumn(name = "p_role", nullable = false)
 	private PersonRole personRole;
 	
+	@Column(name = "p_is_deleted", nullable = false)
+	private boolean isDeleted;
+	
 	@JsonIgnore
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="persons")
 	private Set<Batch> batches;
 	
 	public Person() {/*empty constructor needed*/}
 
-	public Person(String firstName, String lastName, PersonRole personRole) {
+	public Person(String firstName, String lastName, PersonRole personRole, boolean isDeleted) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.personRole = personRole;
+		this.isDeleted = isDeleted;
 	}
 	
 	public Set<Batch> getBatches(){
@@ -89,19 +93,27 @@ public class Person  {
 	public void setPersonRole(PersonRole personRole) {
 		this.personRole = personRole;
 	}
-
+	
+	public boolean isDeleted(){
+		return isDeleted;
+	}
+	
+	public void setIsDeleted(boolean del){
+		this.isDeleted = del; 
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((batches == null) ? 0 : batches.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((personRole == null) ? 0 : personRole.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -112,12 +124,19 @@ public class Person  {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
+		if (batches == null) {
+			if (other.batches != null)
+				return false;
+		} else if (!batches.equals(other.batches))
+			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
 		if (id != other.id)
+			return false;
+		if (isDeleted != other.isDeleted)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -132,13 +151,11 @@ public class Person  {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", personRole=" + personRole + "]";
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", isDeleted=" + isDeleted
+				+ ", personRole=" + personRole + ", batches=" + batches + "]";
 	}
-
-
 	
 		
 }

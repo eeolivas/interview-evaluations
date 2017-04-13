@@ -15,11 +15,15 @@ public class PersonRole {
 	
 	@Column(name = "pr_title")
 	private String title;
+	
+	@Column(name = "pr_is_deleted")
+	private boolean isDeleted;
 
-	public PersonRole(int id, String title) {
+	public PersonRole(int id, String title, boolean isDeleted) {
 		super();
 		this.id = id;
 		this.title = title;
+		this.isDeleted=isDeleted;
 	}
 
 	public PersonRole(){
@@ -42,11 +46,21 @@ public class PersonRole {
 		this.title = title;
 	}
 
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -62,6 +76,8 @@ public class PersonRole {
 		PersonRole other = (PersonRole) obj;
 		if (id != other.id)
 			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -72,8 +88,8 @@ public class PersonRole {
 
 	@Override
 	public String toString() {
-		return "PersonRole [id=" + id + ", title=" + title + "]";
+		return "PersonRole [id=" + id + ", title=" + title + ", isDeleted=" + isDeleted + "]";
 	}
-	
+
 	
 }

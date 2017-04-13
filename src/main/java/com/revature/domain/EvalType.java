@@ -18,6 +18,9 @@ public class EvalType implements Serializable {
 	@Column(name="et_description")
 	private String description;
 	
+	@Column(name="et_is_deleted")
+	private boolean isDelted;
+	
 	public EvalType() {/*empty constructor needed*/}
 
 	public Integer getId() {
@@ -35,39 +38,53 @@ public class EvalType implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+
+	public boolean isDelted() {
+		return isDelted;
+	}
+
+	public void setIsDelted(boolean isDelted) {
+		this.isDelted = isDelted;
+	}
 
 	@Override
 	public int hashCode() {
-		int hash = 3;
-		hash = 19 * hash + Objects.hashCode(this.id);
-		hash = 19 * hash + Objects.hashCode(this.description);
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isDelted ? 1231 : 1237);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		final EvalType other = (EvalType) obj;
-		if (!Objects.equals(this.description, other.description)) {
+		EvalType other = (EvalType) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
 			return false;
-		}
-		if (!Objects.equals(this.id, other.id)) {
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
-		}
+		if (isDelted != other.isDelted)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "EvalType{" + "id=" + id + ", description=" + description + '}';
+		return "EvalType [id=" + id + ", description=" + description + ", isDelted=" + isDelted + "]";
 	}
 	
 }

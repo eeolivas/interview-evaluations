@@ -35,10 +35,13 @@ public class QuestionPool implements Serializable {
 	@Column(name="qp_last_date_used")
 	private Date dateLastUsed;
 	
+	@Column(name="qp_is_deleted")
+	private boolean isDeleted;
+	
 	public QuestionPool(){}
 
 	public QuestionPool(String questionText, Integer maxCommunicationScore, Integer maxKnowledgeScore,
-			Subject subject, Integer useCount, Date dateLastUsed) {
+			Subject subject, Integer useCount, Date dateLastUsed, boolean isDeleted) {
 		super();
 		this.questionText = questionText;
 		this.maxCommunicationScore = maxCommunicationScore;
@@ -46,6 +49,7 @@ public class QuestionPool implements Serializable {
 		this.subject = subject;
 		this.useCount = useCount;
 		this.dateLastUsed = dateLastUsed;
+		this.isDeleted=isDeleted;
 	}
 
 	public Integer getId() {
@@ -104,12 +108,22 @@ public class QuestionPool implements Serializable {
 		this.dateLastUsed = dateLastUsed;
 	}
 
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dateLastUsed == null) ? 0 : dateLastUsed.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + ((maxCommunicationScore == null) ? 0 : maxCommunicationScore.hashCode());
 		result = prime * result + ((maxKnowledgeScore == null) ? 0 : maxKnowledgeScore.hashCode());
 		result = prime * result + ((questionText == null) ? 0 : questionText.hashCode());
@@ -136,6 +150,8 @@ public class QuestionPool implements Serializable {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (isDeleted != other.isDeleted)
 			return false;
 		if (maxCommunicationScore == null) {
 			if (other.maxCommunicationScore != null)
@@ -169,7 +185,8 @@ public class QuestionPool implements Serializable {
 	public String toString() {
 		return "QuestionPool [id=" + id + ", questionText=" + questionText + ", maxCommunicationScore="
 				+ maxCommunicationScore + ", maxKnowledgeScore=" + maxKnowledgeScore + ", subject=" + subject
-				+ ", useCount=" + useCount + ", dateLastUsed=" + dateLastUsed + "]";
+				+ ", useCount=" + useCount + ", dateLastUsed=" + dateLastUsed + ", isDeleted=" + isDeleted + "]";
 	}
+
 		
 }
