@@ -19,7 +19,7 @@ public class EvalType implements Serializable {
 	private String description;
 	
 	@Column(name="et_is_active")
-	private boolean isDelted;
+	private boolean isActive;
 	
 	public EvalType() {/*empty constructor needed*/}
 
@@ -40,12 +40,12 @@ public class EvalType implements Serializable {
 	}
 	
 
-	public boolean isDelted() {
-		return isDelted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setIsDelted(boolean isDelted) {
-		this.isDelted = isDelted;
+	public void setisActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class EvalType implements Serializable {
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDelted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		return result;
 	}
 
@@ -77,14 +77,14 @@ public class EvalType implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDelted != other.isDelted)
+		if (isActive != other.isActive)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "EvalType [id=" + id + ", description=" + description + ", isDelted=" + isDelted + "]";
+		return "EvalType [id=" + id + ", description=" + description + ", isActive=" + isActive + "]";
 	}
 	
 }

@@ -82,7 +82,6 @@ public class Batch {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
 		return result;
 	}
 
@@ -107,17 +106,12 @@ public class Batch {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (persons == null) {
-			if (other.persons != null)
-				return false;
-		} else if (!persons.equals(other.persons))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", name=" + name + ", isActive=" + isActive + ", persons=" + persons + "]";
+		return "Batch [id=" + id + ", name=" + name + ", isActive=" + isActive + "]";
 	}
 
 }
