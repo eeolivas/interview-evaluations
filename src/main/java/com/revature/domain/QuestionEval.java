@@ -23,8 +23,8 @@ public class QuestionEval implements Serializable {
 	@Column(name="qe_knowledge_score")
 	private Integer knowledgeScore;
 	
-	@Column(name="qe_is_deleted")
-	private boolean isDeleted;
+	@Column(name="qe_is_active")
+	private boolean isActive;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="qe_eid")
@@ -40,13 +40,13 @@ public class QuestionEval implements Serializable {
 	public QuestionEval(){}
 
 	public QuestionEval(Integer communicationScore, Integer knowledgeScore, Eval eval,
-			QuestionPool questionPool, boolean isDeleted) {
+			QuestionPool questionPool, boolean isActive) {
 		super();
 		this.communicationScore = communicationScore;
 		this.knowledgeScore = knowledgeScore;
 		this.eval = eval;
 		this.questionPool = questionPool;
-		this.isDeleted=isDeleted;
+		this.isActive=isActive;
 	}
 
 	public Integer getId() {
@@ -98,12 +98,12 @@ public class QuestionEval implements Serializable {
 		this.comments = comments;
 	}
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDeleted(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class QuestionEval implements Serializable {
 		result = prime * result + ((communicationScore == null) ? 0 : communicationScore.hashCode());
 		result = prime * result + ((eval == null) ? 0 : eval.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((knowledgeScore == null) ? 0 : knowledgeScore.hashCode());
 		result = prime * result + ((questionPool == null) ? 0 : questionPool.hashCode());
 		return result;
@@ -149,7 +149,7 @@ public class QuestionEval implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		if (knowledgeScore == null) {
 			if (other.knowledgeScore != null)
@@ -167,7 +167,7 @@ public class QuestionEval implements Serializable {
 	@Override
 	public String toString() {
 		return "QuestionEval [id=" + id + ", communicationScore=" + communicationScore + ", knowledgeScore="
-				+ knowledgeScore + ", isDeleted=" + isDeleted + ", eval=" + eval + ", questionPool=" + questionPool
+				+ knowledgeScore + ", isActive=" + isActive + ", eval=" + eval + ", questionPool=" + questionPool
 				+ ", comments=" + comments + "]";
 	}
 	

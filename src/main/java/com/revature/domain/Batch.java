@@ -28,8 +28,8 @@ public class Batch {
 	@Column(name="b_name")
 	private String name;
 	
-	@Column(name="b_is_deleted")
-	private boolean isDeleted;
+	@Column(name="b_is_active")
+	private boolean isActive;
 	
 	@ManyToMany
 	@JoinTable(name="ie_person_batch", joinColumns=@JoinColumn(name="batch_id"), inverseJoinColumns=@JoinColumn(name="person_id"))
@@ -37,10 +37,10 @@ public class Batch {
 
 	public Batch() {}
 		
-	public Batch(String name, boolean isDeleted) {
+	public Batch(String name, boolean isActive) {
 		super();
 		this.name = name;
-		this.isDeleted = isDeleted;
+		this.isActive = isActive;
 	}
 	
 	public Set<Person> getPersons(){
@@ -67,12 +67,12 @@ public class Batch {
 		this.name = name;
 	}
 	
-	public void setIsDeleted(boolean isDeleted){
-		this.isDeleted = isDeleted;
+	public void setisActive(boolean isActive){
+		this.isActive = isActive;
 	}
 	
-	public boolean isDeleted(){
-		return isDeleted;
+	public boolean isActive(){
+		return isActive;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class Batch {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
 		return result;
@@ -100,7 +100,7 @@ public class Batch {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -117,7 +117,7 @@ public class Batch {
 
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", name=" + name + ", isDeleted=" + isDeleted + ", persons=" + persons + "]";
+		return "Batch [id=" + id + ", name=" + name + ", isActive=" + isActive + ", persons=" + persons + "]";
 	}
 
 }

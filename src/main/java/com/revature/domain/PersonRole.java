@@ -16,14 +16,14 @@ public class PersonRole {
 	@Column(name = "pr_title")
 	private String title;
 	
-	@Column(name = "pr_is_deleted")
-	private boolean isDeleted;
+	@Column(name = "pr_is_active")
+	private boolean isActive;
 
-	public PersonRole(int id, String title, boolean isDeleted) {
+	public PersonRole(int id, String title, boolean isActive) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.isDeleted=isDeleted;
+		this.isActive=isActive;
 	}
 
 	public PersonRole(){
@@ -47,12 +47,12 @@ public class PersonRole {
 	}
 
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDeleted(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class PersonRole {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -76,7 +76,7 @@ public class PersonRole {
 		PersonRole other = (PersonRole) obj;
 		if (id != other.id)
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -88,7 +88,7 @@ public class PersonRole {
 
 	@Override
 	public String toString() {
-		return "PersonRole [id=" + id + ", title=" + title + ", isDeleted=" + isDeleted + "]";
+		return "PersonRole [id=" + id + ", title=" + title + ", isActive=" + isActive + "]";
 	}
 
 	

@@ -37,8 +37,8 @@ public class Person  {
 	@JoinColumn(name = "p_role", nullable = false)
 	private PersonRole personRole;
 	
-	@Column(name = "p_is_deleted", nullable = false)
-	private boolean isDeleted;
+	@Column(name = "p_is_active", nullable = false)
+	private boolean isActive;
 	
 	@JsonIgnore
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="persons")
@@ -46,12 +46,12 @@ public class Person  {
 	
 	public Person() {/*empty constructor needed*/}
 
-	public Person(String firstName, String lastName, PersonRole personRole, boolean isDeleted) {
+	public Person(String firstName, String lastName, PersonRole personRole, boolean isActive) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.personRole = personRole;
-		this.isDeleted = isDeleted;
+		this.isActive = isActive;
 	}
 	
 	public Set<Batch> getBatches(){
@@ -94,12 +94,12 @@ public class Person  {
 		this.personRole = personRole;
 	}
 	
-	public boolean isDeleted(){
-		return isDeleted;
+	public boolean isActive(){
+		return isActive;
 	}
 	
-	public void setIsDeleted(boolean del){
-		this.isDeleted = del; 
+	public void setisActive(boolean del){
+		this.isActive = del; 
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class Person  {
 		result = prime * result + ((batches == null) ? 0 : batches.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((personRole == null) ? 0 : personRole.hashCode());
 		return result;
@@ -136,7 +136,7 @@ public class Person  {
 			return false;
 		if (id != other.id)
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -153,7 +153,7 @@ public class Person  {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", isDeleted=" + isDeleted
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", isActive=" + isActive
 				+ ", personRole=" + personRole + ", batches=" + batches + "]";
 	}
 	

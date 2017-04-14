@@ -35,13 +35,13 @@ public class QuestionPool implements Serializable {
 	@Column(name="qp_last_date_used")
 	private Date dateLastUsed;
 	
-	@Column(name="qp_is_deleted")
-	private boolean isDeleted;
+	@Column(name="qp_is_active")
+	private boolean isActive;
 	
 	public QuestionPool(){}
 
 	public QuestionPool(String questionText, Integer maxCommunicationScore, Integer maxKnowledgeScore,
-			Subject subject, Integer useCount, Date dateLastUsed, boolean isDeleted) {
+			Subject subject, Integer useCount, Date dateLastUsed, boolean isActive) {
 		super();
 		this.questionText = questionText;
 		this.maxCommunicationScore = maxCommunicationScore;
@@ -49,7 +49,7 @@ public class QuestionPool implements Serializable {
 		this.subject = subject;
 		this.useCount = useCount;
 		this.dateLastUsed = dateLastUsed;
-		this.isDeleted=isDeleted;
+		this.isActive=isActive;
 	}
 
 	public Integer getId() {
@@ -109,12 +109,12 @@ public class QuestionPool implements Serializable {
 	}
 
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setisActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class QuestionPool implements Serializable {
 		int result = 1;
 		result = prime * result + ((dateLastUsed == null) ? 0 : dateLastUsed.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((maxCommunicationScore == null) ? 0 : maxCommunicationScore.hashCode());
 		result = prime * result + ((maxKnowledgeScore == null) ? 0 : maxKnowledgeScore.hashCode());
 		result = prime * result + ((questionText == null) ? 0 : questionText.hashCode());
@@ -151,7 +151,7 @@ public class QuestionPool implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		if (maxCommunicationScore == null) {
 			if (other.maxCommunicationScore != null)
@@ -185,7 +185,7 @@ public class QuestionPool implements Serializable {
 	public String toString() {
 		return "QuestionPool [id=" + id + ", questionText=" + questionText + ", maxCommunicationScore="
 				+ maxCommunicationScore + ", maxKnowledgeScore=" + maxKnowledgeScore + ", subject=" + subject
-				+ ", useCount=" + useCount + ", dateLastUsed=" + dateLastUsed + ", isDeleted=" + isDeleted + "]";
+				+ ", useCount=" + useCount + ", dateLastUsed=" + dateLastUsed + ", isActive=" + isActive + "]";
 	}
 
 		

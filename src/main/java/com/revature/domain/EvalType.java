@@ -18,7 +18,7 @@ public class EvalType implements Serializable {
 	@Column(name="et_description")
 	private String description;
 	
-	@Column(name="et_is_deleted")
+	@Column(name="et_is_active")
 	private boolean isDelted;
 	
 	public EvalType() {/*empty constructor needed*/}

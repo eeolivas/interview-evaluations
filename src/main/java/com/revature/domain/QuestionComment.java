@@ -19,8 +19,8 @@ public class QuestionComment implements Serializable {
 	@Column(name="qc_comment_text")
 	private String commentText;
 	
-	@Column(name="qc_is_deleted")
-	private boolean isDeleted;
+	@Column(name="qc_is_active")
+	private boolean isActive;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="qc_eid")
@@ -28,11 +28,11 @@ public class QuestionComment implements Serializable {
 
 	public QuestionComment(){}
 
-	public QuestionComment(String commentText, QuestionEval eval, boolean isDeleted) {
+	public QuestionComment(String commentText, QuestionEval eval, boolean isActive) {
 		super();
 		this.commentText = commentText;
 		this.questionEval = eval;
-		this.isDeleted=isDeleted;
+		this.isActive=isActive;
 	}
 
 	public Integer getId() {
@@ -61,12 +61,12 @@ public class QuestionComment implements Serializable {
 	}
 
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setisActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class QuestionComment implements Serializable {
 		int result = 1;
 		result = prime * result + ((commentText == null) ? 0 : commentText.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		return result;
 	}
 
@@ -98,14 +98,14 @@ public class QuestionComment implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "QuestionComment [id=" + id + ", commentText=" + commentText + ", isDeleted=" + isDeleted + "]";
+		return "QuestionComment [id=" + id + ", commentText=" + commentText + ", isActive=" + isActive + "]";
 	}
 	
 	

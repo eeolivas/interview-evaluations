@@ -22,16 +22,16 @@ public class EvalComment implements Serializable {
 	@JoinColumn(name="ec_eid")
 	private Eval eval;
 	
-	@Column(name="ec_is_deleted")
-	private boolean isDeleted;
+	@Column(name="ec_is_active")
+	private boolean isActive;
 	
 	public EvalComment(){}
 
-	public EvalComment(String commentText, Eval eval, boolean isDeleted) {
+	public EvalComment(String commentText, Eval eval, boolean isActive) {
 		super();
 		this.commentText = commentText;
 		this.eval = eval;
-		this.isDeleted=isDeleted;
+		this.isActive=isActive;
 	}
 
 	public Integer getId() {
@@ -59,12 +59,12 @@ public class EvalComment implements Serializable {
 		this.eval = eval;
 	}
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setisActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class EvalComment implements Serializable {
 		int result = 1;
 		result = prime * result + ((commentText == null) ? 0 : commentText.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		return result;
 	}
 
@@ -96,14 +96,14 @@ public class EvalComment implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isDeleted != other.isDeleted)
+		if (isActive != other.isActive)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "EvalComment [id=" + id + ", commentText=" + commentText + ", isDeleted=" + isDeleted + "]";
+		return "EvalComment [id=" + id + ", commentText=" + commentText + ", isActive=" + isActive + "]";
 	}
 
 }

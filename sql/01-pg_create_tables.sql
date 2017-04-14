@@ -44,7 +44,7 @@ CREATE TABLE ie_batch
 (
 	b_id INT4 PRIMARY KEY,
 	b_name VARCHAR(5000) UNIQUE,
-	b_is_deleted BOOLEAN NOT NULL
+	b_is_active BOOLEAN NOT NULL
 );
 
 
@@ -52,14 +52,14 @@ CREATE TABLE ie_eval_type
 (
 	et_id INT4 PRIMARY KEY,
 	et_description VARCHAR(5000) NOT NULL,
-	et_is_deleted BOOLEAN NOT NULL
+	et_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_person_role
 (
 	pr_id INT4 PRIMARY KEY,
 	pr_title VARCHAR(5000) NOT NULL,
-	pr_is_deleted BOOLEAN NOT NULL
+	pr_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_person
@@ -68,7 +68,7 @@ CREATE TABLE ie_person
 	p_firstname VARCHAR(5000) NOT NULL,
 	p_lastname VARCHAR(5000) NOT NULL,
 	p_role INT4 NOT NULL, FOREIGN KEY(p_role) REFERENCES ie_person_role(pr_id) ON DELETE CASCADE,
-	p_is_deleted BOOLEAN NOT NULL
+	p_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_eval
@@ -79,7 +79,7 @@ CREATE TABLE ie_eval
 	e_eval_type INT4 NOT NULL,FOREIGN KEY(e_eval_type) REFERENCES ie_eval_type(et_id) ON DELETE CASCADE,
 	e_pid_trainee INT4 NOT NULL, FOREIGN KEY(e_pid_trainee) REFERENCES ie_person(p_id) ON DELETE CASCADE,
 	e_batch INT4 NOT NULL, FOREIGN KEY(e_batch) REFERENCES ie_batch(b_id) ON DELETE CASCADE,
-	e_is_deleted BOOLEAN NOT NULL
+	e_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_eval_comment
@@ -87,7 +87,7 @@ CREATE TABLE ie_eval_comment
 	ec_id INT4 PRIMARY KEY,
 	ec_text VARCHAR(5000) NOT NULL,
 	ec_eid INT4 NOT NULL, FOREIGN KEY(ec_eid) REFERENCES ie_eval(e_id) ON DELETE CASCADE,
-	ec_is_deleted BOOLEAN NOT NULL
+	ec_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_person_batch
@@ -101,7 +101,7 @@ CREATE TABLE ie_subject
 (
 	s_id INT4 PRIMARY KEY,
 	s_subject VARCHAR(150) NOT NULL,
-	s_is_deleted BOOLEAN NOT NULL
+	s_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_question_pool
@@ -113,7 +113,7 @@ CREATE TABLE ie_question_pool
 	qp_sid INT4 NOT NULL, FOREIGN KEY(qp_sid) REFERENCES ie_subject(s_id) ON DELETE CASCADE,
 	qp_count INT4 DEFAULT 0 NOT NULL,
 	qp_last_date_used DATE,
-	qp_is_deleted BOOLEAN NOT NULL
+	qp_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_question_eval
@@ -123,7 +123,7 @@ CREATE TABLE ie_question_eval
 	qe_knowledge_score INT4 NOT NULL,
 	qe_eid INT4 NOT NULL, FOREIGN KEY(qe_eid) REFERENCES ie_eval(e_id) ON DELETE CASCADE,
 	qe_qpid INT4 NOT NULL, FOREIGN KEY(qe_qpid) REFERENCES ie_question_pool(qp_id) ON DELETE CASCADE,
-	qe_is_deleted BOOLEAN NOT NULL
+	qe_is_active BOOLEAN NOT NULL
 );
 
 CREATE TABLE ie_question_comment
@@ -131,5 +131,5 @@ CREATE TABLE ie_question_comment
 	qc_id INT4 PRIMARY KEY,
 	qc_comment_text VARCHAR(5000) NOT NULL,
 	qc_eid INT4 NOT NULL, FOREIGN KEY(qc_eid) REFERENCES ie_question_eval(qe_id) ON DELETE CASCADE,
-	qc_is_deleted BOOLEAN NOT NULL
+	qc_is_active BOOLEAN NOT NULL
 );
