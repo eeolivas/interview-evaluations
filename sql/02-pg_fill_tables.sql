@@ -59,7 +59,7 @@ INSERT INTO ie_batch (b_id, b_name, b_is_active)	VALUES (6, '1606 June20 SDET',t
 
 -- ie_person
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (1, 'Hafthor', 'Bjornsson', 1,true);
-INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (2, 'Bruce', 'Willis', 1,true);
+INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (2, 'Bruce', 'Willis', 1,false);
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (3, 'Michael', 'Jordan', 1,true);
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (4, 'Bill', 'Clintin', 1,true);
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (5, 'Tom', 'Cruise', 1,true);
@@ -88,6 +88,7 @@ INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUE
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (28, 'Rosa', 'Parks', 3,true);
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (29, 'Julius', 'Caesar', 3,true);
 INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (30, 'Donald', 'Trump', 3,true);
+INSERT INTO ie_person (p_id, p_firstname, p_lastname, p_role, p_is_active) VALUES (31, 'David', 'Deleted-ton', 1,false);
 
 -- ie_person_batch
 INSERT INTO ie_person_batch (join_id, person_id, batch_id) VALUES (1, 1, 1);

@@ -55,7 +55,7 @@ public class PersonController {
 			 return ResponseEntity.ok(personLogic.getPersonsByLastnameAndPersonRole(pageable, lastname, roleSearch));
 		 } else if((!"".equals(firstname)) && !("".equals(lastname))) {
 			 return ResponseEntity.ok(personLogic.getPersonsByFirstnameAndLastnameAndPersonRole(pageable, firstname, lastname, roleSearch));
-		 } else{
+		 } else{ //if roleSearch is null the return will be all persons with isActive=true
 			 return  ResponseEntity.ok(personLogic.getAllPersonsByPersonRole(pageable, roleSearch));
 		 }
 	 

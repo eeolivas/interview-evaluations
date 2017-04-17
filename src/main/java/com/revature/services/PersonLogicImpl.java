@@ -33,19 +33,19 @@ public class PersonLogicImpl implements PersonLogic {
 	@Override
 	public Page<Person> getPersonByFirstName(Pageable pageable, String firstName) {
 		
-		return dao.findAllByFirstNameIgnoreCase(pageable, firstName);
+		return dao.findAllByFirstNameIgnoreCaseAndIsActiveTrue(pageable, firstName);
 
 	}
 
 	@Override
 	public Page<Person> getPersonByLastName(Pageable pageable, String lastName) {
 		
-		return dao.findAllByLastNameIgnoreCase(pageable, lastName);
+		return dao.findAllByLastNameIgnoreCaseAndIsActiveTrue(pageable, lastName);
 	}
 
 	@Override
 	public Person getPersonById(int id)  {
-		Person person = dao.findOne(id);
+		Person person = dao.findByIdAndIsActiveTrue(id);
 		
 		if (person == null) {
             throw new NotFoundException("Person with id " + id + " does not exist");
@@ -56,7 +56,7 @@ public class PersonLogicImpl implements PersonLogic {
 
 	@Override
 	public Page<Person> getAllPersons(Pageable pageable) {
-		return dao.findAll(pageable);
+		return dao.findByIsActiveTrue(pageable);
 	}
 
 	@Override
@@ -82,13 +82,14 @@ public class PersonLogicImpl implements PersonLogic {
 	@Override
 	public String deletePerson(int id) {
 		Person pers = getPersonById(id);
-		dao.delete(id);
+		pers.setisActive(false);
+		dao.saveAndFlush(pers);
 		return "{\"text\":\"Person: " + id + " - DELETED\"}";
 	}
 
 	@Override
 	public Page<Person> getByFirstNameAndLastName(Pageable pageable, String firstName, String lastName) {
-		return dao.findAllByFirstNameAndLastNameAllIgnoreCase(pageable, firstName, lastName);
+		return dao.findAllByFirstNameAndLastNameAllIgnoreCaseAndIsActiveTrue(pageable, firstName, lastName);
 	}
 
 	@Override
@@ -103,19 +104,19 @@ public class PersonLogicImpl implements PersonLogic {
 	@Override
 	public Page<Person> getAllPersonsByPersonRole(Pageable pageable, PersonRole personRole) {
 		if(personRole==null){
-			return dao.findAll(pageable);
+			return getAllPersons(pageable);
 		} else{
 			validation.validatePersonRole(personRole);	
-			return dao.findAllByPersonRole(pageable, personRole);
+			return dao.findAllByPersonRoleAndIsActiveTrue(pageable, personRole);
 		}
 	}
 
 	@Override
 	public Page<Person> getPersonsByFirstnameAndPersonRole(Pageable pageable, String firstname, PersonRole personRole) {
 		if(personRole == null){
-			return dao.findAllByFirstNameIgnoreCase(pageable, firstname);
+			return dao.findAllByFirstNameIgnoreCaseAndIsActiveTrue(pageable, firstname);
 		} else{
-			return dao.findAllByFirstNameIgnoreCaseAndPersonRole(pageable, firstname, personRole);
+			return dao.findAllByFirstNameIgnoreCaseAndPersonRoleAndIsActiveTrue(pageable, firstname, personRole);
 		}
 			
 	}
@@ -123,9 +124,9 @@ public class PersonLogicImpl implements PersonLogic {
 	@Override
 	public Page<Person> getPersonsByLastnameAndPersonRole(Pageable pageable, String lastname, PersonRole personRole) {
 		if(personRole == null){
-			return dao.findAllByLastNameIgnoreCase(pageable, lastname);
+			return dao.findAllByLastNameIgnoreCaseAndIsActiveTrue(pageable, lastname);
 		}else{
-			return dao.findAllByLastNameIgnoreCaseAndPersonRole(pageable, lastname, personRole);
+			return dao.findAllByLastNameIgnoreCaseAndPersonRoleAndIsActiveTrue(pageable, lastname, personRole);
 		}
 	}
 
@@ -133,9 +134,9 @@ public class PersonLogicImpl implements PersonLogic {
 	public Page<Person> getPersonsByFirstnameAndLastnameAndPersonRole(Pageable pageable, String firstname,
 			String lastname, PersonRole personRole) {
 		if(personRole == null){
-			return dao.findAllByFirstNameAndLastNameAllIgnoreCase(pageable, firstname, lastname);
+			return dao.findAllByFirstNameAndLastNameAllIgnoreCaseAndIsActiveTrue(pageable, firstname, lastname);
 		} else{
-			return dao.findAllByFirstNameIgnoreCaseAndLastNameIgnoreCaseAndPersonRole(pageable, firstname, lastname, personRole);
+			return dao.findAllByFirstNameIgnoreCaseAndLastNameIgnoreCaseAndPersonRoleAndIsActiveTrue(pageable, firstname, lastname, personRole);
 		}
 	}
 
