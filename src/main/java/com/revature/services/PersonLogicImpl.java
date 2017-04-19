@@ -139,5 +139,15 @@ public class PersonLogicImpl implements PersonLogic {
 			return dao.findAllByFirstNameIgnoreCaseAndLastNameIgnoreCaseAndPersonRoleAndIsActiveTrue(pageable, firstname, lastname, personRole);
 		}
 	}
+	
+	
+	// For Admin Use to hard delete
+	@Override
+	public String deletePersonAdmin(int id) {
+		Person pers = getPersonById(id);
+		dao.delete(id);
+		return "{\"text\":\"Person: name: " + pers.getFirstName()+ " " + pers.getLastName()+ " id: " + id + " - FULLY DELETED\"}";
+	}
+	
 
 }

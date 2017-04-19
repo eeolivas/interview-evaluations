@@ -12,7 +12,8 @@ public interface PersonLogic {
 
 	Person createPerson(Person person);
 
-	String deletePerson(int id);
+	String deletePerson(int id); // for setting isActive=false
+	String deletePersonAdmin(int id); // for hard delete option
 	Person updatePerson(Person p); 
 	Page<Person> getAllPersons(Pageable pageable);
 	Page<Person> getPersonByFirstName(Pageable pageable, String firstName);
