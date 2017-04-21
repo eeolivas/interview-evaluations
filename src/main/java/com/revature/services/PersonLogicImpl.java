@@ -144,7 +144,10 @@ public class PersonLogicImpl implements PersonLogic {
 	// For Admin Use to hard delete
 	@Override
 	public String deletePersonAdmin(int id) {
-		Person pers = getPersonById(id);
+		Person pers = dao.findOne(id);
+		if (pers==null){
+			throw new NotFoundException("Person with id " + id + " does not exist");
+		}
 		dao.delete(id);
 		return "{\"text\":\"Person: name: " + pers.getFirstName()+ " " + pers.getLastName()+ " id: " + id + " - FULLY DELETED\"}";
 	}
